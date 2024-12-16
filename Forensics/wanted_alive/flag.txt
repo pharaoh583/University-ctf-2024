@@ -1,0 +1,2 @@
+94.237.57.126:55506/cdba/_rp
+HTB{c4tch3d_th3_m4lw4r3_w1th_th3_l4ss0_c4afa61dceef2329450a371e541abedf}

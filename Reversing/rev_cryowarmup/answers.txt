@@ -1,0 +1,31 @@
+1. What libc function is used to check if the password is correct?
+validate_password
+
+2. What is the size of the password buffer, based on the argument to scanf?
+Based on this line of angr.c
+__isoc99_scanf("%49s", &v0);
+49 chars
+
+3. What is the name of the function that modifies the user's input?
+generate_key
+
+4. What would be the result of applying the operation from this function to a string containing one character, 'B'? Provide your answer as a hex number, e.g. 0x4f.
+Seeing the function generate_key it is clear that the encryption used is:
+    for every char c in password:
+        c = (c ^ '*') + 5
+So if we encrypt the character 'B', the result would be 'm', the hex value is 0x6d
+
+5. What is printed if the password is correct?
+"Access granted!"
+
+6. How long is the password, based on the value that the user's input is compared against (not including the final null byte)?
+Bases on ghidra password value "G SS\x1eI_b" the password is 8 chars long
+
+7. What is the password?
+Doing the following reverse process to the encrypted password knowing that the two operations are reversible
+for every char c in password:
+        c = (c - 5) ^ '*'
+we have h1dd3npw
+
+Decompiled with
+https://dogbolt.org/?id=d56fdd6a-8b34-4acc-a1ac-a291f6e927ee#angr=1&BinaryNinja=1&Ghidra=1
